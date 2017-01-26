@@ -3,13 +3,14 @@ package com.somanyfeeds.api
 import io.dropwizard.Configuration
 
 class Config : Configuration() {
-    var dataSource = DataSourceConfig()
+    lateinit var dataSource: DataSourceConfig
+        private set
 }
 
-class DataSourceConfig {
-    var serverName: String = ""
-    var databaseName: String = ""
-    var portNumber: Int = 0
-    var user: String = ""
-    var password: String? = null
-}
+data class DataSourceConfig(
+    val serverName: String,
+    val databaseName: String,
+    val portNumber: Int,
+    val user: String,
+    val password: String?
+)
