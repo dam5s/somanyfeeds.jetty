@@ -1,0 +1,17 @@
+apply plugin: "kotlin"
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "http://repository.jetbrains.com/all"
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    testCompile "io.damo.aspen:aspen:$aspenVersion"
+    testCompile "org.assertj:assertj-core:3.6.1"
+    testCompile "com.nhaarman:mockito-kotlin:1.0.1"
+}

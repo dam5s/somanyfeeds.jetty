@@ -1,0 +1,22 @@
+apply from: "../../kotlin.gradle"
+apply plugin: 'com.github.johnrengelman.shadow'
+
+dependencies {
+    compile project(":components:articles-api")
+    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+}
+
+jar {
+    manifest {
+        attributes("Main-Class": "com.somanyfeeds.api.AppKt")
+    }
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+task("run", type: Exec, dependsOn: "shadowJar") {
+    workingDir project.projectDir
+    commandLine "java", "-jar", "build/libs/api-all.jar", "server"
+}
