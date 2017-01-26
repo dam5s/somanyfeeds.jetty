@@ -8,7 +8,7 @@ import org.postgresql.ds.PGSimpleDataSource
 
 class Services(config: Config) {
 
-    val pgDataSource = PGSimpleDataSource().apply {
+    private val pg = PGSimpleDataSource().apply {
         serverName = config.dataSource.serverName
         databaseName = config.dataSource.databaseName
         portNumber = config.dataSource.portNumber
@@ -16,13 +16,12 @@ class Services(config: Config) {
         password = config.dataSource.password
     }
 
-    val poolingConfig = HikariConfig().apply {
-        dataSource = pgDataSource
+    private val poolingConfig = HikariConfig().apply {
+        dataSource = pg
     }
 
-    val poolingDataSource = HikariDataSource(poolingConfig)
 
-
-    val articlesRepo = ArticlesRepository(poolingDataSource)
+    val dataSource = HikariDataSource(poolingConfig)
+    val articlesRepo = ArticlesRepository(dataSource)
     val articlesResource = ArticlesResource(articlesRepo)
 }

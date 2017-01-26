@@ -12,6 +12,7 @@ class App : Application<Config>() {
         val services = Services(config)
 
         env.healthChecks().register("base", BaseHealthCheck())
+        env.healthChecks().register("database", DbHealthCheck(services.dataSource))
         env.jersey().register(services.articlesResource)
     }
 
