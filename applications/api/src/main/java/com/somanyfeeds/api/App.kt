@@ -1,22 +1,20 @@
 package com.somanyfeeds.api
 
-import com.somanyfeeds.articlesapi.ArticlesResource
-import com.somanyfeeds.articlesdataaccess.ArticlesRepository
 import io.dropwizard.Application
 import io.dropwizard.setup.Environment
+import java.util.*
 
 class App : Application<Config>() {
 
-    val articlesRepo = ArticlesRepository()
-    val articlesResource = ArticlesResource(articlesRepo)
-
-
     override fun run(config: Config, env: Environment) {
-        env.healthChecks().register("base", HealthCheck())
-        env.jersey().register(articlesResource)
+        val services = Services(config)
+
+        env.healthChecks().register("base", BaseHealthCheck())
+        env.jersey().register(services.articlesResource)
     }
 }
 
 fun main(vararg args: String) {
+    TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
     App().run(*args)
 }
