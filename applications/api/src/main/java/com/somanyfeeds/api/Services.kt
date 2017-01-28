@@ -9,11 +9,13 @@ import org.postgresql.ds.PGSimpleDataSource
 class Services(config: Config) {
 
     private val pg = PGSimpleDataSource().apply {
-        serverName = config.dataSource.serverName
-        databaseName = config.dataSource.databaseName
-        portNumber = config.dataSource.portNumber
-        user = config.dataSource.user
-        password = config.dataSource.password
+        val dataSourceConfig = config.dataSourceConfig
+
+        serverName = dataSourceConfig.serverName
+        databaseName = dataSourceConfig.databaseName
+        portNumber = dataSourceConfig.portNumber
+        user = dataSourceConfig.user
+        password = dataSourceConfig.password
     }
 
     private val poolingConfig = HikariConfig().apply {

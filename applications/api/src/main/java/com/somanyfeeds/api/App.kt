@@ -10,7 +10,7 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import java.util.*
 
-class Config(val dataSource: DataSourceConfig) : Configuration()
+class Config(val dataSourceConfig: DataSourceConfig) : Configuration()
 
 class App : Application<Config>() {
 
