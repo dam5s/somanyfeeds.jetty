@@ -1,6 +1,5 @@
 package io.damo.dropwizard.cloudfoundry
 
-import io.damo.dropwizard.cloudfoundry.configs.VcapService
 import io.dropwizard.configuration.ConfigurationFactory
 import io.dropwizard.configuration.ConfigurationSourceProvider
 

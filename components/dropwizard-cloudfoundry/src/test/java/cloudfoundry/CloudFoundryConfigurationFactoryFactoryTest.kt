@@ -2,7 +2,7 @@ package cloudfoundry
 
 import io.damo.aspen.Test
 import io.damo.dropwizard.cloudfoundry.CloudFoundryConfigurationFactoryFactory
-import io.damo.dropwizard.cloudfoundry.configs.VcapService
+import io.damo.dropwizard.cloudfoundry.VcapService
 import org.assertj.core.api.Assertions.assertThat
 
 class CloudFoundryConfigurationFactoryFactoryTest : Test({

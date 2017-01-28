@@ -1,13 +1,12 @@
-package cloudfoundry
+package cloudfoundry.services
 
 import io.damo.aspen.Test
+import io.damo.dropwizard.cloudfoundry.VcapService
 import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
-import io.damo.dropwizard.cloudfoundry.configs.VcapService
-import io.damo.dropwizard.cloudfoundry.configs.mapPostgresDbConfig
-import org.assertj.core.api.Assertions.assertThat
+import io.damo.dropwizard.cloudfoundry.services.mapPostgresDbConfig
+import org.assertj.core.api.Assertions
 
-class CloudConfigTest : Test({
-
+class PostgresDbConfigMappingTest : Test({
     describe("#mapPostgresDbConfig") {
         test {
             val config = mapPostgresDbConfig(listOf(
@@ -15,7 +14,7 @@ class CloudConfigTest : Test({
                 buildVcapService(credentials = mapOf("uri" to "postgres://user1:pass1@foo.db.elephantsql.com:5432/database1"))
             ))
 
-            assertThat(config).isEqualTo(DataSourceConfig(
+            Assertions.assertThat(config).isEqualTo(DataSourceConfig(
                 serverName = "foo.db.elephantsql.com",
                 databaseName = "database1",
                 portNumber = 5432,
@@ -29,7 +28,7 @@ class CloudConfigTest : Test({
                 buildVcapService(credentials = mapOf("uri" to "postgres://user1@foo.db.elephantsql.com:5432/database1"))
             ))
 
-            assertThat(config).isEqualTo(DataSourceConfig(
+            Assertions.assertThat(config).isEqualTo(DataSourceConfig(
                 serverName = "foo.db.elephantsql.com",
                 databaseName = "database1",
                 portNumber = 5432,
@@ -46,3 +45,4 @@ fun buildVcapService(
     name: String = "my-service",
     tags: List<String> = emptyList()
 ) = VcapService(credentials, label, name, tags)
+

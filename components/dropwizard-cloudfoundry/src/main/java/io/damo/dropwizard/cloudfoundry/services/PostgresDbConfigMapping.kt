@@ -1,5 +1,7 @@
-package io.damo.dropwizard.cloudfoundry.configs
+package io.damo.dropwizard.cloudfoundry.services
 
+import io.damo.dropwizard.cloudfoundry.VcapService
+import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
 import java.net.URI
 
 fun mapPostgresDbConfig(services: List<VcapService>): DataSourceConfig {

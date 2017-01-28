@@ -1,4 +1,4 @@
-package io.damo.dropwizard.cloudfoundry.configs
+package io.damo.dropwizard.cloudfoundry
 
 data class VcapService(
     val credentials: Map<String, Any>,
