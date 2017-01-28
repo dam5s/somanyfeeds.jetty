@@ -8,7 +8,7 @@ import org.assertj.core.api.Assertions.assertThat
 
 class CloudConfigTest : Test({
 
-    describe("#postgresConfigFromUri") {
+    describe("#mapPostgresDbConfig") {
         test {
             val config = mapPostgresDbConfig(listOf(
                 buildVcapService(credentials = emptyMap()),
