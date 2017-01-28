@@ -21,6 +21,18 @@ shadowJar {
 }
 
 task("run", type: Exec, dependsOn: "shadowJar") {
+    environment VCAP_SERVICES: """{
+      "postgres": [
+        {
+          "label": "", "name": "", "tags": [],
+          "credentials": {
+            "uri": "postgres://dam5s@localhost:5432/somanyfeeds_dev"
+          }
+        }
+      ]
+    }
+    """
+
     workingDir project.projectDir
     commandLine "java", "-jar", "build/libs/api-all.jar", "server", "config.yml"
 }

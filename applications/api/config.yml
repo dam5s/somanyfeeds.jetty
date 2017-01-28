@@ -1,5 +1,0 @@
-dataSource:
-  serverName: localhost
-  databaseName: somanyfeeds_dev
-  portNumber: 5432
-  user: dam5s

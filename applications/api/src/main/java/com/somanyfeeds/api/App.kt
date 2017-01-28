@@ -1,10 +1,16 @@
 package com.somanyfeeds.api
 
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.somanyfeeds.api.cf.CloudFoundryConfigurationFactoryFactory
+import com.somanyfeeds.api.cf.configs.DataSourceConfig
+import com.somanyfeeds.api.cf.configs.mapPostgresDbConfig
 import io.dropwizard.Application
+import io.dropwizard.Configuration
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import java.util.*
+
+class Config(val dataSource: DataSourceConfig) : Configuration()
 
 class App : Application<Config>() {
 
@@ -18,6 +24,9 @@ class App : Application<Config>() {
 
     override fun initialize(bootstrap: Bootstrap<Config>) {
         bootstrap.objectMapper.registerKotlinModule()
+        bootstrap.configurationFactoryFactory = CloudFoundryConfigurationFactoryFactory({ services ->
+            Config(mapPostgresDbConfig(services))
+        })
     }
 }
 
