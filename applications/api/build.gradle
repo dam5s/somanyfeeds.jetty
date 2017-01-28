@@ -3,11 +3,11 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 dependencies {
     compile project(":components:articles-api")
+    compile project(":components:dropwizard-cloudfoundry")
 
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
     compile "com.zaxxer:HikariCP:$hikariVersion"
     compile "org.postgresql:postgresql:$postgresVersion"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 }
 
 jar {

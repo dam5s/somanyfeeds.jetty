@@ -1,12 +1,12 @@
-package api.cf
+package cloudfoundry
 
-import com.somanyfeeds.api.cf.CloudFoundryConfigurationFactoryFactory
-import com.somanyfeeds.api.cf.configs.VcapService
 import io.damo.aspen.Test
+import io.damo.dropwizard.cloudfoundry.CloudFoundryConfigurationFactoryFactory
+import io.damo.dropwizard.cloudfoundry.configs.VcapService
 import org.assertj.core.api.Assertions.assertThat
 
 class CloudFoundryConfigurationFactoryFactoryTest : Test({
-    test("#create") {
+    test {
         val env = mapOf("VCAP_SERVICES" to """
           {
             "postgres": [
@@ -21,7 +21,7 @@ class CloudFoundryConfigurationFactoryFactoryTest : Test({
             ]
           }
         """)
-        val factory = CloudFoundryConfigurationFactoryFactory<List<VcapService>>({ it }, getenv = { env[it] })
+        val factory = CloudFoundryConfigurationFactoryFactory({ it }, getenv = { env[it] })
 
 
         val services = factory.create().build()

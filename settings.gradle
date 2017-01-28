@@ -2,5 +2,6 @@ include ":applications:api"
 include ":applications:frontend"
 include ":components:articles-api"
 include ":components:articles-data-access"
+include ":components:dropwizard-cloudfoundry"
 
 rootProject.name = "SoManyFeeds"

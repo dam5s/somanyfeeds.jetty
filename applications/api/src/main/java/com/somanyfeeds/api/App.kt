@@ -1,9 +1,9 @@
 package com.somanyfeeds.api
 
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-import com.somanyfeeds.api.cf.CloudFoundryConfigurationFactoryFactory
-import com.somanyfeeds.api.cf.configs.DataSourceConfig
-import com.somanyfeeds.api.cf.configs.mapPostgresDbConfig
+import io.damo.dropwizard.cloudfoundry.CloudFoundryConfigurationFactoryFactory
+import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
+import io.damo.dropwizard.cloudfoundry.configs.mapPostgresDbConfig
 import io.dropwizard.Application
 import io.dropwizard.Configuration
 import io.dropwizard.setup.Bootstrap

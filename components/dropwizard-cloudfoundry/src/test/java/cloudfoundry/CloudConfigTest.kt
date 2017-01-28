@@ -1,9 +1,9 @@
-package api.cf
+package cloudfoundry
 
-import com.somanyfeeds.api.cf.configs.DataSourceConfig
-import com.somanyfeeds.api.cf.configs.VcapService
-import com.somanyfeeds.api.cf.configs.mapPostgresDbConfig
 import io.damo.aspen.Test
+import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
+import io.damo.dropwizard.cloudfoundry.configs.VcapService
+import io.damo.dropwizard.cloudfoundry.configs.mapPostgresDbConfig
 import org.assertj.core.api.Assertions.assertThat
 
 class CloudConfigTest : Test({

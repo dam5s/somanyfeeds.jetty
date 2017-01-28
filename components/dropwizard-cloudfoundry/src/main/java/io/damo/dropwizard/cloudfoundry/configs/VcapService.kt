@@ -1,4 +1,4 @@
-package com.somanyfeeds.api.cf.configs
+package io.damo.dropwizard.cloudfoundry.configs
 
 data class VcapService(
     val credentials: Map<String, Any>,

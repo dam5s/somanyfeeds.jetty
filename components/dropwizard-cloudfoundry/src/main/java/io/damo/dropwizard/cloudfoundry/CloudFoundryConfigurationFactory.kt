@@ -1,6 +1,6 @@
-package com.somanyfeeds.api.cf
+package io.damo.dropwizard.cloudfoundry
 
-import com.somanyfeeds.api.cf.configs.VcapService
+import io.damo.dropwizard.cloudfoundry.configs.VcapService
 import io.dropwizard.configuration.ConfigurationFactory
 import io.dropwizard.configuration.ConfigurationSourceProvider
 
