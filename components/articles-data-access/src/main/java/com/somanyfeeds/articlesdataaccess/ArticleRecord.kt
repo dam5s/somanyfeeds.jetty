@@ -2,7 +2,7 @@ package com.somanyfeeds.articlesdataaccess
 
 import java.time.LocalDateTime
 
-data class Article(
+data class ArticleRecord(
     val id: Long? = null,
     val title: String? = null,
     val link: String,

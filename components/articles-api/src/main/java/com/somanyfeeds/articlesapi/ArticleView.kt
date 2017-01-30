@@ -1,6 +1,6 @@
 package com.somanyfeeds.articlesapi
 
-import com.somanyfeeds.articlesdataaccess.Article
+import com.somanyfeeds.articlesdataaccess.ArticleRecord
 import java.time.LocalDateTime
 
 data class ArticleView(
@@ -11,10 +11,10 @@ data class ArticleView(
     val source: String? = null
 )
 
-fun present(article: Article) = ArticleView(
-    title = article.title,
-    link = article.link,
-    content = article.content,
-    date = article.date,
-    source = article.source
+fun present(articleRecord: ArticleRecord) = ArticleView(
+    title = articleRecord.title,
+    link = articleRecord.link,
+    content = articleRecord.content,
+    date = articleRecord.date,
+    source = articleRecord.source
 )

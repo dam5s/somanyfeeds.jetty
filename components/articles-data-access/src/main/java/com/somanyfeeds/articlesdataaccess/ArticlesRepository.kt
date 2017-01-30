@@ -9,7 +9,7 @@ import javax.sql.DataSource
 
 class ArticlesRepository(dataSource: DataSource) {
 
-    fun findAll(): List<Article> {
+    fun findAll(): List<ArticleRecord> {
         return withHandle { handle ->
             handle
                 .createQuery(findAllSQL)
@@ -28,7 +28,7 @@ class ArticlesRepository(dataSource: DataSource) {
 
 
     private val articleMapper = ResultSetMapper { index, rs, ctxt ->
-        Article(
+        ArticleRecord(
             id = rs.getLong(1),
             title = rs.getString(2),
             link = rs.getString(3),
