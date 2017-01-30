@@ -5,5 +5,5 @@ data class DataSourceConfig(
     val databaseName: String,
     val portNumber: Int,
     val user: String,
-    val password: String?
+    val password: String? = null
 )

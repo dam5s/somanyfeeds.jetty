@@ -1,0 +1,7 @@
+apply from: "../../kotlin.gradle"
+
+dependencies {
+    compile project(":components:dropwizard-cloudfoundry")
+    compile "com.zaxxer:HikariCP:$hikariVersion"
+    compile "org.postgresql:postgresql:$postgresVersion"
+}

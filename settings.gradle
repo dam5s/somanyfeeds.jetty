@@ -3,5 +3,6 @@ include ":applications:frontend"
 include ":components:articles-api"
 include ":components:articles-data-access"
 include ":components:dropwizard-cloudfoundry"
+include ":components:datasource-creation"
 
 rootProject.name = "SoManyFeeds"

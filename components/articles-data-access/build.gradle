@@ -2,4 +2,5 @@ apply from: "../../kotlin.gradle"
 
 dependencies {
     compile "org.jdbi:jdbi:$jdbiVersion"
+    testCompile project(":components:datasource-creation")
 }
