@@ -1,10 +1,14 @@
 include ":applications:api"
 include ":applications:integration"
 include ":applications:frontend"
-include ":components:articles-api"
-include ":components:articles-data-access"
+
+include ":components:article-api"
+include ":components:article-data-access"
+include ":components:feed-data-access"
+
 include ":components:dropwizard-cloudfoundry"
 include ":components:datasource-creation"
+include ":components:jdbc-support"
 include ":components:rest-support"
 
 rootProject.name = "SoManyFeeds"

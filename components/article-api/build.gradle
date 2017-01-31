@@ -1,7 +1,7 @@
 apply from: "../../kotlin.gradle"
 
 dependencies {
-    compile project(":components:articles-data-access")
+    compile project(":components:article-data-access")
 
     compile "javax.ws.rs:javax.ws.rs-api:$jaxRsVersion"
 }
