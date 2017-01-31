@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "org.jetbrains.kotlinx:kotlinx-support-jdk8:0.3"
 
     testCompile "io.damo.aspen:aspen:$aspenVersion"
     testCompile "org.assertj:assertj-core:3.6.1"
