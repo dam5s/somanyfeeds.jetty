@@ -33,5 +33,5 @@ task("run", type: Exec, dependsOn: "shadowJar") {
     """
 
     workingDir project.projectDir
-    commandLine "java", "-jar", "build/libs/api-all.jar", "server", "config.yml"
+    commandLine "java", "-jar", "build/libs/api-all.jar", "server"
 }

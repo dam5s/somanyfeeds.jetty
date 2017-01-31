@@ -1,0 +1,9 @@
+apply from: "../../kotlin.gradle"
+
+test {
+    dependsOn(":applications:api:shadowJar")
+}
+
+dependencies {
+    testCompile project(":components:rest-support")
+}

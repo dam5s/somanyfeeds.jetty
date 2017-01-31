@@ -1,0 +1,7 @@
+apply from: "../../kotlin.gradle"
+
+
+dependencies {
+    compile "com.squareup.okhttp3:okhttp:3.6.0"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+}
