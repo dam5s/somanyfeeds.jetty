@@ -8,6 +8,7 @@ buildscript {
         postgresVersion = "9.4.1212"
         hikariVersion = "2.5.1"
         jdbiVersion = "2.78"
+        slf4jVersion = "1.7.22"
     }
 
     repositories {

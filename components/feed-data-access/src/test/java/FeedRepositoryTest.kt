@@ -17,15 +17,15 @@ class FeedRepositoryTest : Test({
 
     test("#findAll") {
         //language=PostgreSQL
-        jdbcTemplate.execute(
-            "TRUNCATE TABLE feed CASCADE",
-            """
+        jdbcTemplate.execute("TRUNCATE TABLE feed CASCADE")
+
+        //language=PostgreSQL
+        jdbcTemplate.execute("""
             INSERT INTO feed (id, name, slug, info, type) VALUES
             (210, 'G+', 'g-plus', 'http://gplus.example.com/feed.rss', 'RSS'),
             (211, 'Github', 'github', 'http://github.example.com/feed.atom', 'ATOM'),
             (212, 'Tumblr', 'tumblr', 'http://tumb.example.com/feed.rss', 'RSS')
-            """
-        )
+        """)
 
 
         val feeds = repo.findAll()

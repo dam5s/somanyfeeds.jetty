@@ -4,6 +4,7 @@ include ":applications:frontend"
 
 include ":components:article-api"
 include ":components:article-data-access"
+include ":components:feed-processing"
 include ":components:feed-data-access"
 
 include ":components:dropwizard-cloudfoundry"

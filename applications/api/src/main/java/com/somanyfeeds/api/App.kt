@@ -19,6 +19,7 @@ class App : Application<Config>() {
 
         env.healthChecks().register("base", BaseHealthCheck())
         env.healthChecks().register("database", DbHealthCheck(services.dataSource))
+        env.lifecycle().manage(services.feedUpdatesScheduler)
         env.jersey().register(services.articlesResource)
     }
 

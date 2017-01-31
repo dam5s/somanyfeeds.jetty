@@ -2,5 +2,6 @@ apply from: "../../kotlin.gradle"
 
 dependencies {
     compile project(":components:jdbc-support")
+    compile project(":components:feed-data-access")
     testCompile project(":components:datasource-creation")
 }

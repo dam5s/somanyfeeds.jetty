@@ -3,10 +3,12 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 dependencies {
     compile project(":components:article-api")
+    compile project(":components:feed-processing")
     compile project(":components:dropwizard-cloudfoundry")
     compile project(":components:datasource-creation")
 
     compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
 }
 
 jar {

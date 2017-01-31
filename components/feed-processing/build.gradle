@@ -1,0 +1,11 @@
+apply from: "../../kotlin.gradle"
+
+dependencies {
+    compile project(":components:feed-data-access")
+    compile project(":components:article-data-access")
+    compile project(":components:rest-support")
+
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion"
+//    compile "org.springframework.social:spring-social-twitter:$springSocialVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+}
