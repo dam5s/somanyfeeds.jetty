@@ -11,5 +11,7 @@ import javax.ws.rs.core.MediaType.APPLICATION_JSON
 class ArticlesResource(val repo: ArticleRepository) {
 
     @GET
-    fun list() = repo.findAll().map(::present)
+    fun list() = mapOf("articles" to allArticleViews())
+
+    private fun allArticleViews() = repo.findAll().map(::present)
 }

@@ -9,7 +9,11 @@ import io.dropwizard.Application
 import io.dropwizard.Configuration
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
+import org.eclipse.jetty.servlets.CrossOriginFilter
+import org.eclipse.jetty.servlets.CrossOriginFilter.*
 import java.util.*
+import java.util.EnumSet.allOf
+import javax.servlet.DispatcherType
 
 class Config(val dataSourceConfig: DataSourceConfig, val twitterConfig: TwitterConfig) : Configuration()
 
@@ -22,6 +26,14 @@ class App : Application<Config>() {
         env.healthChecks().register("database", DbHealthCheck(services.dataSource))
         env.lifecycle().manage(services.feedUpdatesScheduler)
         env.jersey().register(services.articlesResource)
+
+        env.servlets().addFilter("CORS", CrossOriginFilter::class.java).apply {
+            setInitParameter(ALLOWED_ORIGINS_PARAM, "*");
+            setInitParameter(ALLOWED_HEADERS_PARAM, "X-Requested-With,Content-Type,Accept,Origin,Authorization");
+            setInitParameter(ALLOWED_METHODS_PARAM, "OPTIONS,GET,PUT,POST,DELETE,HEAD");
+            setInitParameter(ALLOW_CREDENTIALS_PARAM, "true");
+            addMappingForUrlPatterns(allOf(DispatcherType::class.java), true, "/articles");
+        }
     }
 
     override fun initialize(bootstrap: Bootstrap<Config>) {
