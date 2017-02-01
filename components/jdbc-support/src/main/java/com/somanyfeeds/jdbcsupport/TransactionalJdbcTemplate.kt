@@ -1,6 +1,5 @@
 package com.somanyfeeds.jdbcsupport
 
-import kotlinx.support.jdk7.use
 import java.sql.Connection
 import javax.sql.DataSource
 
@@ -18,6 +17,6 @@ class TransactionalJdbcTemplate(dataSource: DataSource) : JdbcTemplate(dataSourc
             return function(connection)
         }
 
-        return dataSource.connection.use { function(it) }
+        return super.withConnection(function)
     }
 }
