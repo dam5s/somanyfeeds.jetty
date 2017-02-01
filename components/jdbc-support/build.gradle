@@ -1,1 +1,5 @@
 apply from: "../../kotlin.gradle"
+
+dependencies {
+    testCompile project(":components:datasource-creation")
+}
