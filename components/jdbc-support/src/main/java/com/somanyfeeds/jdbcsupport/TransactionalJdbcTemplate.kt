@@ -11,10 +11,8 @@ class TransactionalJdbcTemplate(dataSource: DataSource) : JdbcTemplate(dataSourc
         get() = internalTransactionManager
 
     override fun <T> withConnection(function: (Connection) -> T): T {
-        val connection = internalTransactionManager.getConnection()
-
-        if (connection != null) {
-            return function(connection)
+        internalTransactionManager.getConnection()?.let {
+            return function(it)
         }
 
         return super.withConnection(function)
