@@ -1,0 +1,232 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #f6f6f6;
+    font-size: 16px;
+    font-family: 'Vollkorn', serif;
+    font-weight: 400;
+    color: #888;
+}
+
+h1, h2, h3 {
+    line-height: 130%;
+    color: #333;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: .5rem 0;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+a:link, a:hover, a:visited, a:active {
+    text-decoration: none;
+    color: #00BCD4;
+}
+
+p {
+    margin: 1rem 0;
+}
+
+section.content {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+#app-content {
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    width: 100%;
+    padding: 0 1% 1rem 1%;
+
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+
+    column-gap: 1rem;
+    -webkit-column-gap: 1rem;
+    -moz-column-gap: 1rem;
+
+    column-fill: auto;
+    -webkit-column-fill: auto;
+    -moz-column-fill: auto;
+}
+
+@media (min-width: 800px) {
+    #app-content {
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+
+        padding: 0 1% 1rem 0;
+    }
+}
+
+#app-header {
+    background-color: rgba(43, 43, 43, .90);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .3);
+    overflow: auto;
+}
+
+#app-header section.content {
+    position: relative;
+}
+
+#app-header svg {
+    visibility: hidden;
+    height: 4rem;
+}
+
+@media (min-width: 600px) {
+    #app-header svg {
+        font-size: 2rem;
+        width: 10rem;
+        margin: .5rem 0 0 2%;
+        visibility: visible;
+    }
+}
+
+#app-menu {
+    margin: 0 1rem 0 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+#app-header + svg {
+    margin: 5.1rem 0 0.5rem 1rem;
+    visibility: visible;
+    height: 4rem;
+    width: 11rem;
+}
+
+@media (min-width: 600px) {
+    #app-header + svg {
+        margin-top: 1rem;
+        visibility: hidden;
+    }
+}
+
+svg {
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.9));
+    -webkit-filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.9));
+    -moz-filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.9));
+    -o-filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.9));
+}
+
+#app-menu ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#app-menu li a {
+    padding: .5rem 1rem;
+    margin-left: .3rem;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+#app-menu li a:last-child {
+    margin-right: .3rem;
+}
+
+#app-menu li.selected a,
+#app-menu li a:hover {
+    border-color: rgba(0, 188, 212, 0.3);
+}
+
+#app-menu li.selected a {
+    background-color: rgba(0, 188, 212, 0.1);
+}
+
+article {
+    display: inline-block;
+    background-color: #fff;
+
+    padding: 1rem;
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    border-radius: 3px;
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+}
+
+@media (min-width: 500px) {
+    article {
+        padding: 1rem 2rem;
+    }
+}
+
+@media (min-width: 800px) {
+    article {
+        margin: 0 1% 1rem;
+    }
+}
+
+article header {
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+article h1 a:link, article h1 a:visited {
+    color: #444;
+}
+
+article h2 {
+    float: right;
+    font-size: .8rem;
+    color: #666;
+}
+
+article img {
+    max-width: 96%;
+}
+
+article section {
+    line-height: 180%;
+}
+
+/* Google Plus articles */
+article .attachments {
+    border-top: 1px solid #E5E5E5;
+    margin-top: 2rem;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+article .attachment_article_content,
+article .attachment_photo_content {
+    display: none;
+}
+
+article pre {
+    overflow-x: auto;
+    background-color: #f6f9f9;
+    padding: 1rem;
+}
+
+article.tweet section {
+    line-height: 130%;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
