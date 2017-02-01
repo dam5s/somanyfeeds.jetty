@@ -11,8 +11,8 @@ import org.assertj.core.api.Assertions.assertThat
 class FeedRepositoryTest : Test({
 
     val dataSource = createTestDataSource("somanyfeeds_feed_test")
-    val repo = FeedRepository(dataSource)
     val jdbcTemplate = JdbcTemplate(dataSource)
+    val repo = FeedRepository(jdbcTemplate)
 
 
     test("#findAll") {

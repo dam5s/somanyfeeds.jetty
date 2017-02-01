@@ -1,12 +1,8 @@
 package com.somanyfeeds.feeddataaccess
 
 import com.somanyfeeds.jdbcsupport.JdbcTemplate
-import javax.sql.DataSource
 
-class FeedRepository(dataSource: DataSource) {
-
-    private val jdbcTemplate = JdbcTemplate(dataSource)
-
+class FeedRepository(val jdbcTemplate: JdbcTemplate) {
 
     fun findAll() = jdbcTemplate.query(findAllSQL) { rs ->
         FeedRecord(

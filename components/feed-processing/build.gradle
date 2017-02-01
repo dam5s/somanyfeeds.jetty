@@ -4,6 +4,7 @@ dependencies {
     compile project(":components:feed-data-access")
     compile project(":components:article-data-access")
     compile project(":components:rest-support")
+    compile project(":components:jdbc-support")
 
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion"
     compile "org.twitter4j:twitter4j-core:4.0.6"

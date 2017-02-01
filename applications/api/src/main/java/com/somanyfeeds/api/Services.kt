@@ -9,14 +9,17 @@ import com.somanyfeeds.feedprocessing.FeedsUpdater
 import com.somanyfeeds.feedprocessing.atom.AtomFeedProcessor
 import com.somanyfeeds.feedprocessing.rss.RssFeedProcessor
 import com.somanyfeeds.feedprocessing.twitter.TwitterFeedProcessor
+import com.somanyfeeds.jdbcsupport.TransactionalJdbcTemplate
 import twitter4j.TwitterFactory
 import twitter4j.conf.ConfigurationBuilder
 import java.util.concurrent.ScheduledThreadPoolExecutor
 
 class Services(config: Config) {
     val dataSource = createDataSource(config.dataSourceConfig)
+    val jdbcTemplate = TransactionalJdbcTemplate(dataSource)
+    val transactionManager = jdbcTemplate.transactionManager
 
-    val articlesRepo = ArticleRepository(dataSource)
+    val articlesRepo = ArticleRepository(jdbcTemplate)
     val articlesResource = ArticlesResource(articlesRepo)
 
 
@@ -27,8 +30,8 @@ class Services(config: Config) {
         .setOAuthAccessTokenSecret(config.twitterConfig.accessTokenSecret)
         .build())
 
-    val articleUpdater = ArticleUpdater(articlesRepo, 20)
-    val feedsRepo = FeedRepository(dataSource)
+    val articleUpdater = ArticleUpdater(articlesRepo, 20, transactionManager)
+    val feedsRepo = FeedRepository(jdbcTemplate)
     val feedProcessors = listOf(
         AtomFeedProcessor(),
         RssFeedProcessor(),

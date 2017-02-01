@@ -4,13 +4,8 @@ import com.somanyfeeds.feeddataaccess.FeedRecord
 import com.somanyfeeds.jdbcsupport.JdbcTemplate
 import java.sql.ResultSet
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.util.*
-import javax.sql.DataSource
 
-class ArticleRepository(dataSource: DataSource) {
-
-    private val jdbcTemplate = JdbcTemplate(dataSource)
+class ArticleRepository(val jdbcTemplate: JdbcTemplate) {
 
 
     fun findAll() = jdbcTemplate.query(findAllSQL) { rs ->
@@ -24,20 +19,17 @@ class ArticleRepository(dataSource: DataSource) {
         )
     }
 
-    fun create(article: ArticleRecord, feed: FeedRecord)
-        = jdbcTemplate.create("article", mapOf(
+    fun create(article: ArticleRecord, feed: FeedRecord) = jdbcTemplate.create("article", mapOf(
         "feed_id" to feed.id,
         "title" to article.title,
         "link" to article.link,
         "content" to article.content,
-        "date" to article.date.toDate()
+        "date" to article.date
     ))
 
     fun deleteByFeed(feed: FeedRecord)
         = jdbcTemplate.execute("DELETE FROM article WHERE feed_id = ?", feed.id!!)
 
-
-    private fun LocalDateTime.toDate() = Date.from(atZone(ZoneId.systemDefault()).toInstant())
 
     private fun ResultSet.getLocalDateTime(column: Int)
         = LocalDateTime.parse(getString(column).replace(" ", "T"))

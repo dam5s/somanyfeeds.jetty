@@ -14,8 +14,8 @@ import java.time.LocalDateTime
 class ArticleRepositoryTest : Test({
 
     val dataSource = createTestDataSource("somanyfeeds_article_test")
-    val repo = ArticleRepository(dataSource)
     val jdbcTemplate = JdbcTemplate(dataSource)
+    val repo = ArticleRepository(jdbcTemplate)
 
     before {
         //language=PostgreSQL
