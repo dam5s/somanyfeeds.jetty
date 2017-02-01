@@ -10,16 +10,15 @@ internal class InternalTransactionManager(val dataSource: DataSource) : Transact
         allocateConnection().use { connection ->
             connection.autoCommit = false
 
-            val result = function()
-
             try {
+                val result = function()
                 connection.commit()
                 connection.autoCommit = true
+                return result
+
             } finally {
                 releaseConnection()
             }
-
-            return result
         }
     }
 
