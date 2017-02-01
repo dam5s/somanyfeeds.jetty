@@ -18,7 +18,6 @@ CREATE TABLE feed (
 INSERT INTO feed (name, slug, info, type) VALUES
   ('Github', 'code', 'https://github.com/dam5s.atom', 'ATOM'),
   ('Google+', 'social', 'http://gplusrss.com/rss/feed/aa49b266059d0628a1c112dabaec23a152aa2bad054d8', 'RSS'),
-  ('Pivotal Blog', 'blog', 'http://blog.pivotal.io/author/dleberrigaud/feed', 'RSS'),
   ('Medium', 'blog', 'https://medium.com/feed/@its_damo', 'RSS'),
   ('Twitter', 'social', 'its_damo', 'TWITTER');
 

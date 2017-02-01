@@ -54,6 +54,10 @@ class IntegrationTest : Test({
               ]
             }
             """)
+            .env("TWITTER_CONSUMER_KEY", "<twitter_consumer_key>")
+            .env("TWITTER_CONSUMER_SECRET", "<twitter_consumer_secret>")
+            .env("TWITTER_ACCESS_TOKEN", "<twitter_access_token>")
+            .env("TWITTER_ACCESS_TOKEN_SECRET", "<twitter_access_token_secret>")
             .start()
 
         waitUntilServerIsUp(8080)
