@@ -7,8 +7,8 @@ include ":components:article-data-access"
 include ":components:feed-processing"
 include ":components:feed-data-access"
 
-include ":components:dropwizard-cloudfoundry"
 include ":components:datasource-creation"
+include ":components:cloudfoundry-support"
 include ":components:jdbc-support"
 include ":components:rest-support"
 

@@ -4,10 +4,10 @@ apply plugin: 'com.github.johnrengelman.shadow'
 dependencies {
     compile project(":components:article-api")
     compile project(":components:feed-processing")
-    compile project(":components:dropwizard-cloudfoundry")
+    compile project(":components:cloudfoundry-support")
     compile project(":components:datasource-creation")
 
-    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "org.eclipse.jetty:jetty-server:$jettyVersion"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
 }
 
@@ -26,5 +26,5 @@ apply from: "env.gradle"
 task("run", type: Exec, dependsOn: "shadowJar") {
     environment environmentVariables
     workingDir project.projectDir
-    commandLine "java", "-jar", "build/libs/api-all.jar", "server"
+    commandLine "java", "-jar", "build/libs/api-all.jar"
 }

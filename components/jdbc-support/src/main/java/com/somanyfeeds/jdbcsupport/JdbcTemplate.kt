@@ -76,7 +76,8 @@ open class JdbcTemplate(internal val dataSource: DataSource) {
                 is Long -> setLong(bindingIndex, value)
                 is LocalDate -> setDate(bindingIndex, java.sql.Date.valueOf(value))
                 is LocalDateTime -> setTimestamp(bindingIndex, java.sql.Timestamp.valueOf(value))
-                else -> throw IllegalArgumentException("Unsupported binding for value of type ${value?.javaClass}")
+                null -> setString(bindingIndex, null)
+                else -> throw IllegalArgumentException("Unsupported binding for value of type ${value.javaClass}")
             }
         }
         return this

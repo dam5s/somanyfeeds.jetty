@@ -1,6 +1,5 @@
 apply from: "../../kotlin.gradle"
 
 dependencies {
-    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 }

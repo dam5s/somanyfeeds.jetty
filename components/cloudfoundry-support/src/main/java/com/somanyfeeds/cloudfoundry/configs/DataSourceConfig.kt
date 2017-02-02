@@ -1,4 +1,4 @@
-package io.damo.dropwizard.cloudfoundry.configs
+package com.somanyfeeds.cloudfoundry.configs
 
 data class DataSourceConfig(
     val serverName: String,

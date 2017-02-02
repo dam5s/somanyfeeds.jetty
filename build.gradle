@@ -2,12 +2,10 @@ buildscript {
     ext {
         aspenVersion = "2.0.0"
         kotlinVersion = "1.0.6"
-        dropwizardVersion = "1.0.5"
-        jaxRsVersion = "2.0.1"
+        jettyVersion = "9.4.1.v20170120"
         jacksonVersion = "2.7.8"
         postgresVersion = "9.4.1212"
         hikariVersion = "2.5.1"
-        jdbiVersion = "2.78"
         slf4jVersion = "1.7.22"
     }
 

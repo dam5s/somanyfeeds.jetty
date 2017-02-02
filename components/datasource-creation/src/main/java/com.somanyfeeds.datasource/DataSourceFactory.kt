@@ -1,8 +1,8 @@
 package com.somanyfeeds.datasource
 
+import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
 import org.postgresql.ds.PGSimpleDataSource
 import javax.sql.DataSource
 

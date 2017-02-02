@@ -1,11 +1,11 @@
 package cloudfoundry
 
+import com.somanyfeeds.cloudfoundry.VcapService
+import com.somanyfeeds.cloudfoundry.readVcapServices
 import io.damo.aspen.Test
-import io.damo.dropwizard.cloudfoundry.CloudFoundryConfigurationFactoryFactory
-import io.damo.dropwizard.cloudfoundry.VcapService
 import org.assertj.core.api.Assertions.assertThat
 
-class CloudFoundryConfigurationFactoryFactoryTest : Test({
+class VcapServiceTest : Test({
     test {
         val env = mapOf("VCAP_SERVICES" to """
           {
@@ -21,10 +21,9 @@ class CloudFoundryConfigurationFactoryFactoryTest : Test({
             ]
           }
         """)
-        val factory = CloudFoundryConfigurationFactoryFactory({ it }, getenv = { env[it] })
 
 
-        val services = factory.create().build()
+        val services = readVcapServices(getenv = { env[it] })
 
 
         assertThat(services).isEqualTo(listOf(

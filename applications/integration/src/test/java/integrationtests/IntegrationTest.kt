@@ -54,13 +54,14 @@ class IntegrationTest : Test({
               ]
             }
             """)
+            .env("PORT", "8081")
             .env("TWITTER_CONSUMER_KEY", "<twitter_consumer_key>")
             .env("TWITTER_CONSUMER_SECRET", "<twitter_consumer_secret>")
             .env("TWITTER_ACCESS_TOKEN", "<twitter_access_token>")
             .env("TWITTER_ACCESS_TOKEN_SECRET", "<twitter_access_token_secret>")
             .start()
 
-        waitUntilServerIsUp(8080)
+        waitUntilServerIsUp(8081)
     }
 
     after {
@@ -68,7 +69,7 @@ class IntegrationTest : Test({
     }
 
     test {
-        val response = restTemplate.get("http://localhost:8080/articles")
+        val response = restTemplate.get("http://localhost:8081/articles")
 
         assertThat(response is RestResult.Success).isTrue()
     }

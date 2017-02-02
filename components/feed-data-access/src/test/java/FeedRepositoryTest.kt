@@ -1,10 +1,10 @@
+import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
 import com.somanyfeeds.datasource.createDataSource
 import com.somanyfeeds.feeddataaccess.FeedRecord
 import com.somanyfeeds.feeddataaccess.FeedRepository
 import com.somanyfeeds.feeddataaccess.FeedType
 import com.somanyfeeds.jdbcsupport.JdbcTemplate
 import io.damo.aspen.Test
-import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
 import org.assertj.core.api.Assertions.assertThat
 
 

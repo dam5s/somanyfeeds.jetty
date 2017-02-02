@@ -1,11 +1,11 @@
 package jdbcsupport
 
+import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
 import com.somanyfeeds.datasource.createDataSource
 import com.somanyfeeds.jdbcsupport.JdbcTemplate
 import com.somanyfeeds.jdbcsupport.getLocalDate
 import com.somanyfeeds.jdbcsupport.getLocalDateTime
 import io.damo.aspen.Test
-import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
 import kotlinx.support.jdk7.use
 import org.assertj.core.api.Assertions.assertThat
 import java.time.LocalDate
@@ -57,6 +57,22 @@ class JdbcTemplateTest : Test({
         }
     }
 
+    test("#create with null binding") {
+        val id = template.create("person", mapOf(
+            "name" to null,
+            "age" to 35
+        ))
+
+        dataSource.connection.use { connection ->
+            val rs = connection
+                .createStatement()
+                .executeQuery("SELECT name, age FROM person WHERE id = $id")
+                .apply { next() }
+
+            assertThat(rs.getString(1)).isNull()
+            assertThat(rs.getInt(2)).isEqualTo(35)
+        }
+    }
 
     test("#query") {
         dataSource.connection.use { connection ->

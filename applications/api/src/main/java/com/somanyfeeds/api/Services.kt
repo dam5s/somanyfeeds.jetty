@@ -1,6 +1,6 @@
 package com.somanyfeeds.api
 
-import com.somanyfeeds.articlesapi.ArticlesResource
+import com.somanyfeeds.articlesapi.ArticlesController
 import com.somanyfeeds.articlesdataaccess.ArticleRepository
 import com.somanyfeeds.datasource.createDataSource
 import com.somanyfeeds.feeddataaccess.FeedRepository
@@ -20,7 +20,7 @@ class Services(config: Config) {
     val transactionManager = jdbcTemplate.transactionManager
 
     val articlesRepo = ArticleRepository(jdbcTemplate)
-    val articlesResource = ArticlesResource(articlesRepo)
+    val articlesController = ArticlesController(articlesRepo)
 
 
     val twitterFactory = TwitterFactory(ConfigurationBuilder()

@@ -2,12 +2,12 @@ package articlesdataaccess
 
 import com.somanyfeeds.articlesdataaccess.ArticleRecord
 import com.somanyfeeds.articlesdataaccess.ArticleRepository
+import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
 import com.somanyfeeds.datasource.createDataSource
 import com.somanyfeeds.feeddataaccess.FeedRecord
 import com.somanyfeeds.feeddataaccess.FeedType
 import com.somanyfeeds.jdbcsupport.JdbcTemplate
 import io.damo.aspen.Test
-import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
 import org.assertj.core.api.Assertions.assertThat
 import java.time.LocalDateTime
 

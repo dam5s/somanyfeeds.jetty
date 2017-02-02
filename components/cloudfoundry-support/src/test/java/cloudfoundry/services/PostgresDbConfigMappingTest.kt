@@ -1,10 +1,10 @@
 package cloudfoundry.services
 
+import com.somanyfeeds.cloudfoundry.VcapService
+import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
+import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
 import io.damo.aspen.Test
-import io.damo.dropwizard.cloudfoundry.VcapService
-import io.damo.dropwizard.cloudfoundry.configs.DataSourceConfig
-import io.damo.dropwizard.cloudfoundry.services.mapPostgresDbConfig
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 
 class PostgresDbConfigMappingTest : Test({
     describe("#mapPostgresDbConfig") {
@@ -14,7 +14,7 @@ class PostgresDbConfigMappingTest : Test({
                 buildVcapService(credentials = mapOf("uri" to "postgres://user1:pass1@foo.db.elephantsql.com:5432/database1"))
             ))
 
-            Assertions.assertThat(config).isEqualTo(DataSourceConfig(
+            assertThat(config).isEqualTo(DataSourceConfig(
                 serverName = "foo.db.elephantsql.com",
                 databaseName = "database1",
                 portNumber = 5432,
@@ -28,7 +28,7 @@ class PostgresDbConfigMappingTest : Test({
                 buildVcapService(credentials = mapOf("uri" to "postgres://user1@foo.db.elephantsql.com:5432/database1"))
             ))
 
-            Assertions.assertThat(config).isEqualTo(DataSourceConfig(
+            assertThat(config).isEqualTo(DataSourceConfig(
                 serverName = "foo.db.elephantsql.com",
                 databaseName = "database1",
                 portNumber = 5432,
