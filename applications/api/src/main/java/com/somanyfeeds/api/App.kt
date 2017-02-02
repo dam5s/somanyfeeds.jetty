@@ -1,66 +1,46 @@
 package com.somanyfeeds.api
 
-import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
 import com.somanyfeeds.cloudfoundry.configs.TwitterConfig
 import com.somanyfeeds.cloudfoundry.readVcapServices
 import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
+import com.somanyfeeds.jetty.JettyApplication
+import com.somanyfeeds.jetty.JettyManagedService
 import org.eclipse.jetty.server.Handler
-import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.server.handler.HandlerList
-import org.eclipse.jetty.server.handler.HandlerWrapper
 import java.util.*
 
-class Config(val port: Int, val dataSourceConfig: DataSourceConfig, val twitterConfig: TwitterConfig)
+class App : JettyApplication() {
 
-class App {
+    override val applicationServices: List<JettyManagedService>
+    override val applicationHandlers: List<Handler>
+    override val port: Int
+
+    init {
+        val vcapServices = readVcapServices()
+        val dataSourceConfig = mapPostgresDbConfig(vcapServices)
+        val twitterConfig = loadTwitterConfig()
+
+        val services = Services(dataSourceConfig, twitterConfig)
+
+        port = env("PORT").toInt()
+        applicationServices = listOf(
+            services.feedUpdatesScheduler
+        )
+        applicationHandlers = listOf(
+            CorsHandler(),
+            services.articlesController
+        )
+    }
+
 
     private fun env(name: String) = System.getenv(name)
 
-    private fun loadConfig(): Config {
-        val vcapServices = readVcapServices()
-
-        val port = env("PORT").toInt()
-        val dataSourceConfig = mapPostgresDbConfig(vcapServices)
-        val twitterConfig = TwitterConfig(
+    private fun loadTwitterConfig(): TwitterConfig {
+        return TwitterConfig(
             consumerKey = env("TWITTER_CONSUMER_KEY"),
             consumerSecret = env("TWITTER_CONSUMER_SECRET"),
             accessToken = env("TWITTER_ACCESS_TOKEN"),
             accessTokenSecret = env("TWITTER_ACCESS_TOKEN_SECRET")
         )
-
-        return Config(port, dataSourceConfig, twitterConfig)
-    }
-
-    fun start() {
-        val services = Services(loadConfig())
-        val wrappers: List<HandlerWrapper> = listOf(CorsHandlerWrapper())
-        val handlers: List<Handler> = listOf(services.articlesController)
-
-        Server(loadConfig().port).apply {
-            stopAtShutdown = true
-            handler = wrappers.merge().apply {
-                handler = handlers.union()
-            }
-
-            addLifeCycleListener(services.feedUpdatesScheduler)
-            start()
-        }
-    }
-
-    fun List<HandlerWrapper>.merge(): HandlerWrapper {
-        val initialWrapper: HandlerWrapper? = null
-        val finalWrapper = this.foldRight(initialWrapper, { currentWrapper, maybePreviousWrapper ->
-            maybePreviousWrapper?.let { it.handler = currentWrapper }
-            currentWrapper
-        })!!
-
-        return finalWrapper
-    }
-
-    fun List<Handler>.union(): Handler {
-        return HandlerList().apply {
-            forEach { addHandler(it) }
-        }
     }
 }
 

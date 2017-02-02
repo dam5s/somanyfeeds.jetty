@@ -2,6 +2,8 @@ package com.somanyfeeds.api
 
 import com.somanyfeeds.articlesapi.ArticlesController
 import com.somanyfeeds.articlesdataaccess.ArticleRepository
+import com.somanyfeeds.cloudfoundry.configs.DataSourceConfig
+import com.somanyfeeds.cloudfoundry.configs.TwitterConfig
 import com.somanyfeeds.datasource.createDataSource
 import com.somanyfeeds.feeddataaccess.FeedRepository
 import com.somanyfeeds.feedprocessing.ArticleUpdater
@@ -14,8 +16,8 @@ import twitter4j.TwitterFactory
 import twitter4j.conf.ConfigurationBuilder
 import java.util.concurrent.ScheduledThreadPoolExecutor
 
-class Services(config: Config) {
-    val dataSource = createDataSource(config.dataSourceConfig)
+class Services(dataSourceConfig: DataSourceConfig, twitterConfig: TwitterConfig) {
+    val dataSource = createDataSource(dataSourceConfig)
     val jdbcTemplate = TransactionalJdbcTemplate(dataSource)
     val transactionManager = jdbcTemplate.transactionManager
 
@@ -24,10 +26,10 @@ class Services(config: Config) {
 
 
     val twitterFactory = TwitterFactory(ConfigurationBuilder()
-        .setOAuthConsumerKey(config.twitterConfig.consumerKey)
-        .setOAuthConsumerSecret(config.twitterConfig.consumerSecret)
-        .setOAuthAccessToken(config.twitterConfig.accessToken)
-        .setOAuthAccessTokenSecret(config.twitterConfig.accessTokenSecret)
+        .setOAuthConsumerKey(twitterConfig.consumerKey)
+        .setOAuthConsumerSecret(twitterConfig.consumerSecret)
+        .setOAuthAccessToken(twitterConfig.accessToken)
+        .setOAuthAccessTokenSecret(twitterConfig.accessTokenSecret)
         .build())
 
     val articleUpdater = ArticleUpdater(articlesRepo, 20, transactionManager)

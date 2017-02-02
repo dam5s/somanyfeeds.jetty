@@ -1,11 +1,11 @@
 package com.somanyfeeds.api
 
 import org.eclipse.jetty.server.Request
-import org.eclipse.jetty.server.handler.HandlerWrapper
+import org.eclipse.jetty.server.handler.AbstractHandler
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class CorsHandlerWrapper : HandlerWrapper() {
+class CorsHandler : AbstractHandler() {
 
     override fun handle(target: String, request: Request, servletRequest: HttpServletRequest, servletResponse: HttpServletResponse) {
         servletResponse.addCorsHeaders()
@@ -14,8 +14,6 @@ class CorsHandlerWrapper : HandlerWrapper() {
             request.isHandled = true
             return
         }
-
-        super.handle(target, request, servletRequest, servletResponse)
     }
 
     private fun HttpServletResponse.addCorsHeaders() {

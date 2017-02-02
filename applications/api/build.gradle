@@ -6,9 +6,10 @@ dependencies {
     compile project(":components:feed-processing")
     compile project(":components:cloudfoundry-support")
     compile project(":components:datasource-creation")
+    compile project(":components:jetty-support")
 
-    compile "org.eclipse.jetty:jetty-server:$jettyVersion"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "org.slf4j:slf4j-simple:$slf4jVersion"
 }
 
 jar {
