@@ -30,11 +30,20 @@ open class JdbcTemplate(internal val dataSource: DataSource) {
         }
     }
 
-    fun <T> query(sql: String, rowMapper: (ResultSet) -> T) = withConnection { connection ->
+    fun <T> query(sql: String, vararg bindings: Any, rowMapper: (ResultSet) -> T) = withConnection { connection ->
         connection
             .prepareStatement(sql)
+            .bind(bindings)
             .executeQuery()
             .map(rowMapper)
+    }
+
+    fun <T> find(sql: String, vararg bindings: Any, rowMapper: (ResultSet) -> T) = withConnection { connection ->
+        connection
+            .prepareStatement(sql)
+            .bind(bindings)
+            .executeQuery()
+            .mapFirst(rowMapper)
     }
 
     fun execute(sql: String, vararg bindings: Any) = withConnection { connection ->
@@ -64,6 +73,11 @@ open class JdbcTemplate(internal val dataSource: DataSource) {
         }
 
         return results
+    }
+
+    private fun <T> ResultSet.mapFirst(mapping: (ResultSet) -> T): T {
+        next()
+        return mapping(this)
     }
 
     private fun PreparedStatement.bind(bindings: Collection<Any?>): PreparedStatement {

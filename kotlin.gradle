@@ -3,9 +3,6 @@ apply plugin: "kotlin"
 repositories {
     jcenter()
     mavenCentral()
-    maven {
-        url "http://repository.jetbrains.com/all"
-    }
 }
 
 dependencies {

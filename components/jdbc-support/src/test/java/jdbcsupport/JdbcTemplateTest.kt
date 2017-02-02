@@ -74,6 +74,8 @@ class JdbcTemplateTest : Test({
         }
     }
 
+    data class Person(val id: Long, val name: String, val age: Int, val birthDate: LocalDate, val updatedAt: LocalDateTime)
+
     test("#query") {
         dataSource.connection.use { connection ->
             connection
@@ -85,8 +87,6 @@ class JdbcTemplateTest : Test({
                       (12, 'Brandon', 17, '2000-08-22', '2016-02-01 14:02:12')
                 """)
         }
-
-        data class Person(val id: Long, val name: String, val age: Int, val birthDate: LocalDate, val updatedAt: LocalDateTime)
 
 
         val people = template.query("SELECT id, name, age, birth_date, updated_at FROM person") { rs ->
@@ -103,6 +103,35 @@ class JdbcTemplateTest : Test({
         assertThat(people).containsExactly(
             Person(id = 10, name = "Johnny", age = 10, birthDate = LocalDate.parse("2006-04-02"), updatedAt = LocalDateTime.parse("2016-02-01T14:00:10")),
             Person(id = 11, name = "Liz", age = 12, birthDate = LocalDate.parse("2004-03-02"), updatedAt = LocalDateTime.parse("2016-02-01T14:01:11")),
+            Person(id = 12, name = "Brandon", age = 17, birthDate = LocalDate.parse("2000-08-22"), updatedAt = LocalDateTime.parse("2016-02-01T14:02:12"))
+        )
+    }
+
+    test("#find") {
+        dataSource.connection.use { connection ->
+            connection
+                .createStatement()
+                .executeUpdate("""
+                    INSERT INTO person (id, name, age, birth_date, updated_at) VALUES
+                      (10, 'Johnny', 10, '2006-04-02', '2016-02-01 14:00:10'),
+                      (11, 'Liz', 12, '2004-03-02', '2016-02-01 14:01:11'),
+                      (12, 'Brandon', 17, '2000-08-22', '2016-02-01 14:02:12')
+                """)
+        }
+
+
+        val person = template.find("SELECT id, name, age, birth_date, updated_at FROM person WHERE id = ?", 12) { rs ->
+            Person(
+                id = rs.getLong(1),
+                name = rs.getString(2),
+                age = rs.getInt(3),
+                birthDate = rs.getLocalDate(4),
+                updatedAt = rs.getLocalDateTime(5)
+            )
+        }
+
+
+        assertThat(person).isEqualTo(
             Person(id = 12, name = "Brandon", age = 17, birthDate = LocalDate.parse("2000-08-22"), updatedAt = LocalDateTime.parse("2016-02-01T14:02:12"))
         )
     }

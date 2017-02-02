@@ -14,8 +14,7 @@ class FeedRepositoryTest : Test({
     val jdbcTemplate = JdbcTemplate(dataSource)
     val repo = FeedRepository(jdbcTemplate)
 
-
-    test("#findAll") {
+    before {
         //language=PostgreSQL
         jdbcTemplate.execute("TRUNCATE TABLE feed CASCADE")
 
@@ -26,10 +25,11 @@ class FeedRepositoryTest : Test({
             (211, 'Github', 'github', 'http://github.example.com/feed.atom', 'ATOM'),
             (212, 'Tumblr', 'tumblr', 'http://tumb.example.com/feed.rss', 'RSS')
         """)
+    }
 
 
+    test("#findAll") {
         val feeds = repo.findAll()
-
 
         val expectedFeeds = listOf(
             FeedRecord(
@@ -54,7 +54,21 @@ class FeedRepositoryTest : Test({
                 type = FeedType.RSS
             )
         )
-        assertThat(expectedFeeds).isEqualTo(feeds)
+        assertThat(feeds).isEqualTo(expectedFeeds)
+    }
+
+    test("#find") {
+        val feed = repo.find(212)
+
+        val expectedFeed = FeedRecord(
+            id = 212,
+            name = "Tumblr",
+            slug = "tumblr",
+            info = "http://tumb.example.com/feed.rss",
+            type = FeedType.RSS
+        )
+
+        assertThat(feed).isEqualTo(expectedFeed)
     }
 })
 

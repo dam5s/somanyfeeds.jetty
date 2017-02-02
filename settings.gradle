@@ -1,9 +1,12 @@
 include ":applications:api"
 include ":applications:integration"
 include ":applications:frontend"
+include ":applications:admin"
 
 include ":components:article-api"
 include ":components:article-data-access"
+
+include ":components:feed-admin"
 include ":components:feed-processing"
 include ":components:feed-data-access"
 
