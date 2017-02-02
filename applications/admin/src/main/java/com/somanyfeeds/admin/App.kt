@@ -4,6 +4,8 @@ import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
 import com.somanyfeeds.jetty.JettyApplication
 import com.somanyfeeds.jetty.JettyManagedService
 import org.eclipse.jetty.server.Handler
+import org.eclipse.jetty.server.handler.ResourceHandler
+import org.eclipse.jetty.util.resource.Resource
 import java.util.*
 
 class App : JettyApplication() {
@@ -15,11 +17,14 @@ class App : JettyApplication() {
     init {
         val vcapServices = readVcapServices()
         val dataSourceConfig = mapPostgresDbConfig(vcapServices)
-
         val services = Services(dataSourceConfig)
 
+        val resourceHandler = ResourceHandler().apply {
+            baseResource = Resource.newClassPathResource("static")
+        }
+
         port = env("PORT").toInt()
-        applicationHandlers = listOf(services.feedsController)
+        applicationHandlers = listOf(resourceHandler, services.feedsController)
     }
 
 
