@@ -1,10 +1,16 @@
-<#-- @ftlvariable name="feeds" type="java.util.List<com.somanyfeeds.feedadmin.FeedView>" -->
+<#-- @ftlvariable name="feed" type="com.somanyfeeds.feedadmin.FeedView" -->
+<#-- @ftlvariable name="notification" type="java.lang.String" -->
 
 <#import "layout/layout.ftl" as layout>
 <@layout.adminLayout>
-<h1>List of Feeds</h1>
+<h1>View Feed</h1>
 
-<#list feeds as feed>
+    <#if notification??>
+    <div class="card notification">
+    ${notification}
+    </div>
+    </#if>
+
 <dl class="card">
     <dt>Id</dt>
     <dd>${feed.id}</dd>
@@ -18,9 +24,9 @@
     <dd>${feed.type}</dd>
 
     <nav>
-        <a href="/feeds/${feed.id}">View</a>
         <a href="/feeds/${feed.id}/edit">Edit</a>
+        <a href="/feeds">Back to list</a>
     </nav>
 </dl>
-</#list>
+
 </@layout.adminLayout>

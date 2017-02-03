@@ -4,16 +4,31 @@
 <@layout.adminLayout>
 <h1>Edit Feed</h1>
 
-<dl class="card">
-    <dt>id</dt>
-    <dd>${feed.id}</dd>
-    <dt>name</dt>
-    <dd>${feed.name}</dd>
-    <dt>slug</dt>
-    <dd>${feed.slug}</dd>
-    <dt>info</dt>
-    <dd>${feed.info}</dd>
-    <dt>type</dt>
-    <dd>${feed.type}</dd>
+<dl>
+    <form action="/feeds/${feed.id}" method="post" class="card">
+        <dt>Id</dt>
+        <dd>${feed.id}</dd>
+        <label>
+            <dt>Name</dt>
+            <dd><input type="text" value="${feed.name}"/></dd>
+        </label>
+        <label>
+            <dt>Slug</dt>
+            <dd><input type="text" value="${feed.slug}"/></dd>
+        </label>
+        <label>
+            <dt>Info</dt>
+            <dd><input type="text" value="${feed.info}"/></dd>
+        </label>
+        <label>
+            <dt>Type</dt>
+            <dd><input type="text" value="${feed.type}"/></dd>
+        </label>
+
+        <nav>
+            <input type="submit" value="Save" class="button"/>
+            <a href="/feeds">Cancel</a>
+        </nav>
+    </form>
 </dl>
 </@layout.adminLayout>

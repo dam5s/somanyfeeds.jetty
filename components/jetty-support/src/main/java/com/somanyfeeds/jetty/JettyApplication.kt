@@ -3,43 +3,61 @@ package com.somanyfeeds.jetty
 import org.eclipse.jetty.server.Handler
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.server.handler.HandlerList
-import org.eclipse.jetty.util.component.AbstractLifeCycle.AbstractLifeCycleListener
-import org.eclipse.jetty.util.component.LifeCycle
+import org.eclipse.jetty.server.handler.ResourceHandler
+import org.eclipse.jetty.server.session.DatabaseAdaptor
+import org.eclipse.jetty.server.session.JDBCSessionDataStore
+import org.eclipse.jetty.server.session.JDBCSessionDataStoreFactory
+import org.eclipse.jetty.server.session.SessionHandler
+import org.eclipse.jetty.util.resource.Resource
+import javax.sql.DataSource
 
 
-abstract class JettyApplication {
+abstract class JettyApplication(port: Int) {
 
-    abstract val applicationServices: List<JettyManagedService>
-    abstract val applicationHandlers: List<Handler>
-    abstract val port: Int
+    data class JettyAppConfig(
+        val services: List<JettyManagedService>,
+        val handlers: List<Handler>
+    )
+
+    abstract fun configure(): JettyAppConfig
 
     fun start() {
-        Server(port).apply {
-            stopAtShutdown = true
-            handler = applicationHandlers.toList()
+        val config = configure()
 
-            applicationServices.forEach {
+        server.apply {
+            config.services.forEach {
                 addLifeCycleListener(JettyManagedServiceWrapper(it))
             }
 
+            stopAtShutdown = true
+            handler = config.handlers.toList()
             start()
         }
     }
 
+
+    protected val server = Server(port)
+
+    protected fun buildStaticResourcesHandler()
+        = ResourceHandler().apply { baseResource = Resource.newClassPathResource("static") }
+
+    protected fun buildJdbcSessionHandler(dataSource: DataSource): SessionHandler {
+
+        val dbAdaptor = DatabaseAdaptor().apply { datasource = dataSource }
+
+        server.addBean(JDBCSessionDataStoreFactory().apply {
+            setDatabaseAdaptor(dbAdaptor)
+            setSessionTableSchema(JDBCSessionDataStore.SessionTableSchema().apply {
+                setDatabaseAdaptor(dbAdaptor)
+            })
+        })
+
+        return SessionHandler()
+    }
 
     private fun List<Handler>.toList(): Handler {
         return HandlerList().apply {
             forEach { addHandler(it) }
         }
     }
-}
-
-class JettyManagedServiceWrapper(val service: JettyManagedService) : AbstractLifeCycleListener() {
-    override fun lifeCycleStarting(event: LifeCycle?) = service.start()
-    override fun lifeCycleStopping(event: LifeCycle?) = service.stop()
-}
-
-interface JettyManagedService {
-    fun start()
-    fun stop()
 }

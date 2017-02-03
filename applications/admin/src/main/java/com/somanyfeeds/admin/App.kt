@@ -2,36 +2,28 @@ import com.somanyfeeds.admin.Services
 import com.somanyfeeds.cloudfoundry.readVcapServices
 import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
 import com.somanyfeeds.jetty.JettyApplication
-import com.somanyfeeds.jetty.JettyManagedService
-import org.eclipse.jetty.server.Handler
-import org.eclipse.jetty.server.handler.ResourceHandler
-import org.eclipse.jetty.util.resource.Resource
 import java.util.*
 
-class App : JettyApplication() {
+class App(port: Int) : JettyApplication(port) {
 
-    override val applicationServices = emptyList<JettyManagedService>()
-    override val applicationHandlers: List<Handler>
-    override val port: Int
+    override fun configure(): JettyAppConfig {
 
-    init {
         val vcapServices = readVcapServices()
         val dataSourceConfig = mapPostgresDbConfig(vcapServices)
         val services = Services(dataSourceConfig)
 
-        val resourceHandler = ResourceHandler().apply {
-            baseResource = Resource.newClassPathResource("static")
-        }
-
-        port = env("PORT").toInt()
-        applicationHandlers = listOf(resourceHandler, services.feedsController)
+        return JettyAppConfig(
+            services = emptyList(),
+            handlers = listOf(
+                buildStaticResourcesHandler(),
+                buildJdbcSessionHandler(services.dataSource),
+                services.feedsController
+            )
+        )
     }
-
-
-    private fun env(name: String) = System.getenv(name)
 }
 
 fun main(vararg args: String) {
     TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
-    App().start()
+    App(System.getenv("PORT").toInt()).start()
 }

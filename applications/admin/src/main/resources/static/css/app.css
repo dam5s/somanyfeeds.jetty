@@ -1,5 +1,4 @@
 html, body {
-    height: 100%;
     margin: 0;
     background-color: #f6f6f6;
     font-size: 16px;
@@ -107,13 +106,12 @@ svg {
     width: 100%;
 
     margin: 4rem auto 2rem;
-    padding: 2rem;
+    padding: 2rem 1rem;
     font-size: 1rem;
 }
 
 .card {
     box-sizing: border-box;
-    overflow: auto;
 
     background-color: #fff;
     border-radius: 3px;
@@ -123,12 +121,40 @@ svg {
     margin-bottom: 1rem;
 }
 
+.card nav {
+    overflow: auto;
+}
+
+.card nav > * {
+    margin-left: 1rem;
+    float: right;
+    padding: .3rem 1rem;
+    display: inline-block;
+}
+
+.button {
+    background-color: #00BCD4;
+    color: #fff;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+}
+
+.button:active {
+    background-color: #0091A9;
+}
+
 dt {
     color: #333;
     width: 100rem;
-    text-transform: capitalize;
 }
 
 dd {
     margin-bottom: 1rem;
+}
+
+form input[type=text] {
+    padding: .2rem .3rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
