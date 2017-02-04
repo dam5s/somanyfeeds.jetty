@@ -8,6 +8,13 @@ data class FeedRecord(
     val type: FeedType
 )
 
+data class FeedUpdates(
+    val name: String,
+    val slug: String,
+    val info: String,
+    val type: FeedType
+)
+
 enum class FeedType { RSS, ATOM, TWITTER, CUSTOM }
 
 fun feedTypeFromString(value: String) =
@@ -15,5 +22,6 @@ fun feedTypeFromString(value: String) =
         "RSS" -> FeedType.RSS
         "ATOM" -> FeedType.ATOM
         "TWITTER" -> FeedType.TWITTER
-        else -> FeedType.CUSTOM
+        "CUSTOM" -> FeedType.CUSTOM
+        else -> throw IllegalArgumentException("Invalid string value for FeedType")
     }

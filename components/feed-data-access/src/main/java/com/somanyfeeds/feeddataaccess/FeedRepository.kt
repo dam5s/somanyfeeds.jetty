@@ -9,6 +9,15 @@ class FeedRepository(val jdbcTemplate: JdbcTemplate) {
 
     fun find(id: Long) = jdbcTemplate.find(findSQL, id) { rs -> mapper(rs) }
 
+    fun update(id: Long, updates: FeedUpdates) = jdbcTemplate.execute(
+        updateSQL,
+        updates.name,
+        updates.slug,
+        updates.info,
+        updates.type.toString(),
+        id
+    )
+
 
     private val mapper = { rs: ResultSet ->
         FeedRecord(
@@ -21,6 +30,6 @@ class FeedRepository(val jdbcTemplate: JdbcTemplate) {
     }
 
     private val findSQL = "SELECT id, name, slug, info, type FROM feed WHERE id = ?"
-
     private val findAllSQL = "SELECT id, name, slug, info, type FROM feed"
+    private val updateSQL = "UPDATE feed SET name = ?, slug = ?, info = ?, type = ?::feed_type WHERE id = ?"
 }

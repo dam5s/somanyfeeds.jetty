@@ -3,6 +3,7 @@ import com.somanyfeeds.datasource.createDataSource
 import com.somanyfeeds.feeddataaccess.FeedRecord
 import com.somanyfeeds.feeddataaccess.FeedRepository
 import com.somanyfeeds.feeddataaccess.FeedType
+import com.somanyfeeds.feeddataaccess.FeedUpdates
 import com.somanyfeeds.jdbcsupport.JdbcTemplate
 import io.damo.aspen.Test
 import org.assertj.core.api.Assertions.assertThat
@@ -69,6 +70,22 @@ class FeedRepositoryTest : Test({
         )
 
         assertThat(feed).isEqualTo(expectedFeed)
+    }
+
+    test("#update") {
+        repo.update(212, FeedUpdates(
+            name = "New Tumblr",
+            slug = "new-tumblr",
+            info = "http://newtumblr.example.com/feed.rss",
+            type = FeedType.CUSTOM
+        ))
+
+        jdbcTemplate.find("SELECT name, slug, info, type FROM feed WHERE id = 212") { rs ->
+            assertThat(rs.getString(1)).isEqualTo("New Tumblr")
+            assertThat(rs.getString(2)).isEqualTo("new-tumblr")
+            assertThat(rs.getString(3)).isEqualTo("http://newtumblr.example.com/feed.rss")
+            assertThat(rs.getString(4)).isEqualTo("CUSTOM")
+        }
     }
 })
 

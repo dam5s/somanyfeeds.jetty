@@ -1,10 +1,13 @@
 package com.somanyfeeds.feedadmin
 
 import com.somanyfeeds.feeddataaccess.FeedRepository
+import com.somanyfeeds.feeddataaccess.FeedUpdates
+import com.somanyfeeds.feeddataaccess.feedTypeFromString
 import freemarker.template.Configuration
 import freemarker.template.Template
 import org.eclipse.jetty.server.Request
 import org.eclipse.jetty.server.handler.AbstractHandler
+import org.eclipse.jetty.util.MultiMap
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpSession
@@ -60,7 +63,14 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
             val matchResult = feedDetailsRegex.matchEntire(request.requestURI)!!
             val id = matchResult.groupValues[1].toLong()
 
-            // TODO update here
+            val formParams = request.formParams()
+
+            feedRepo.update(id, FeedUpdates(
+                name = formParams.firstValue("name"),
+                slug = formParams.firstValue("slug"),
+                info = formParams.firstValue("info"),
+                type = feedTypeFromString(formParams.firstValue("type"))
+            ))
 
             val session = servletRequest.getSession(true)
             session.setAttribute("notification", "Feed updated successfully")
@@ -70,7 +80,16 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
         }
     }
 
-    fun HttpSession.takeAttribute(name: String): Any? {
+
+    private fun Request.formParams(): MultiMap<String> {
+        val formParams = MultiMap<String>()
+        extractFormParameters(formParams)
+        return formParams
+    }
+
+    private fun <V> MultiMap<V>.firstValue(name: String) = this[name]!!.first()
+
+    private fun HttpSession.takeAttribute(name: String): Any? {
         val value = getAttribute(name)
         removeAttribute(name)
         return value

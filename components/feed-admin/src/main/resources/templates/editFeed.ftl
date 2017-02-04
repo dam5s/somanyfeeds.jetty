@@ -10,19 +10,19 @@
         <dd>${feed.id}</dd>
         <label>
             <dt>Name</dt>
-            <dd><input type="text" value="${feed.name}"/></dd>
+            <dd><input type="text" name="name" value="${feed.name}"/></dd>
         </label>
         <label>
             <dt>Slug</dt>
-            <dd><input type="text" value="${feed.slug}"/></dd>
+            <dd><input type="text" name="slug" value="${feed.slug}"/></dd>
         </label>
         <label>
             <dt>Info</dt>
-            <dd><input type="text" value="${feed.info}"/></dd>
+            <dd><input type="text" name="info" value="${feed.info}"/></dd>
         </label>
         <label>
             <dt>Type</dt>
-            <dd><input type="text" value="${feed.type}"/></dd>
+            <dd><input type="text" name="type" value="${feed.type}"/></dd>
         </label>
 
         <nav>
