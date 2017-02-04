@@ -4,6 +4,7 @@ import com.somanyfeeds.cloudfoundry.configs.TwitterConfig
 import com.somanyfeeds.cloudfoundry.readVcapServices
 import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
 import com.somanyfeeds.jetty.JettyApplication
+import com.somanyfeeds.jetty.JettyControllerHandler
 import java.util.*
 
 class App(port: Int) : JettyApplication(port) {
@@ -17,7 +18,10 @@ class App(port: Int) : JettyApplication(port) {
 
         return JettyAppConfig(
             services = listOf(services.feedUpdatesScheduler),
-            handlers = listOf(CorsHandler(), services.articlesController)
+            handlers = listOf(
+                CorsHandler(),
+                JettyControllerHandler(services.articlesController)
+            )
         )
     }
 

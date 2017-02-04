@@ -2,6 +2,6 @@ apply from: "../../kotlin.gradle"
 
 dependencies {
     compile project(":components:article-data-access")
-    compile "org.eclipse.jetty:jetty-server:$jettyVersion"
+    compile project(":components:jetty-support")
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 }

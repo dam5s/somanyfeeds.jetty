@@ -2,6 +2,7 @@ import com.somanyfeeds.admin.Services
 import com.somanyfeeds.cloudfoundry.readVcapServices
 import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
 import com.somanyfeeds.jetty.JettyApplication
+import com.somanyfeeds.jetty.JettyControllerHandler
 import java.util.*
 
 class App(port: Int) : JettyApplication(port) {
@@ -17,7 +18,7 @@ class App(port: Int) : JettyApplication(port) {
             handlers = listOf(
                 buildStaticResourcesHandler(),
                 buildJdbcSessionHandler(services.dataSource),
-                services.feedsController
+                JettyControllerHandler(services.feedsController)
             )
         )
     }
