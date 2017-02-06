@@ -16,7 +16,7 @@ class App(port: Int) : JettyApplication(port) {
         return JettyAppConfig(
             services = emptyList(),
             handlers = listOf(
-                buildStaticResourcesHandler(),
+                buildClasspathResourcesHandler(),
                 buildJdbcSessionHandler(services.dataSource),
                 JettyControllerHandler(services.feedsController)
             )
