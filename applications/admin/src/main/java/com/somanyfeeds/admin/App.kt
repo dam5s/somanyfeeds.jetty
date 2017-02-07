@@ -1,4 +1,5 @@
-import com.somanyfeeds.admin.Services
+package com.somanyfeeds.admin
+
 import com.somanyfeeds.cloudfoundry.readVcapServices
 import com.somanyfeeds.cloudfoundry.services.mapPostgresDbConfig
 import com.somanyfeeds.jetty.JettyApplication
