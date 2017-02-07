@@ -1,15 +1,17 @@
 html, body {
     margin: 0;
     background-color: #f6f6f6;
-    font-size: 16px;
-    font-family: 'Vollkorn', serif;
-    font-weight: 400;
+    font-size: 15px;
+    font-family: 'Merriweather', 'Georgia', serif;
+    font-weight: 300;
     color: #888;
 }
 
 h1, h2, h3 {
     line-height: 130%;
     color: #333;
+    font-family: 'Merriweather Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
 }
 
 h1 {
@@ -55,7 +57,7 @@ section.content {
 #app-header svg {
     height: 4rem;
     font-size: 2rem;
-    width: 10rem;
+    width: 20rem;
     margin: .5rem 0 0 2%;
 }
 

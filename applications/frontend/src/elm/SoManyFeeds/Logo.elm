@@ -7,21 +7,20 @@ import Svg.Attributes exposing (..)
 
 view : Html nothing
 view =
-    svg [ viewBox "0 0 730 200" ]
+    svg [ viewBox "0 0 900 200" ]
         [ circle
-            [ cx "595"
-            , cy "100"
-            , r "130"
+            [ cx "668"
+            , cy "92"
+            , r "140"
             , fill "#00BCD4"
             ]
             []
         , text_
             [ x "0"
             , y "160"
-            , textAnchor "130"
-            , fontFamily "Vollkorn"
+            , fontFamily "Merriweather Sans"
             , fontSize "200"
-            , fontWeight "500"
+            , fontWeight "400"
             , fill "#FFFFFF"
             ]
             [ text "damo.io" ]

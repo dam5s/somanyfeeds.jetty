@@ -6,9 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Vollkorn:400">
+    <link rel="stylesheet"
+          href="http://fonts.googleapis.com/css?family=Merriweather:300|Merriweather+Sans:400">
     <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/admin.css">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -16,10 +17,12 @@
 <body>
 <header id="app-header">
     <section class="content">
-        <svg viewBox="0 0 730 200">
-            <circle cx="595" cy="100" r="130" fill="#00BCD4"></circle>
-            <text x="0" y="160" text-anchor="130" font-family="Vollkorn" font-size="200" font-weight="500"
-                  fill="#FFFFFF">damo.io
+        <svg viewBox="0 0 1500 200">
+            <circle cx="668" cy="92" r="140" fill="#00BCD4"></circle>
+            <text x="0" y="160" text-anchor="130"
+                  font-family="Merriweather Sans" font-size="200"
+                  font-weight="400"
+                  fill="#FFFFFF">damo.io admin
             </text>
         </svg>
         <aside id="app-menu">
