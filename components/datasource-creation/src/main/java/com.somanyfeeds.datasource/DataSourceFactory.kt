@@ -17,6 +17,7 @@ fun createDataSource(config: DataSourceConfig): DataSource {
 
     val poolingConfig = HikariConfig().apply {
         dataSource = pg
+        maximumPoolSize = 2
     }
 
     return HikariDataSource(poolingConfig)
