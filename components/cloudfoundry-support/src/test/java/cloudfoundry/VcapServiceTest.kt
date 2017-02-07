@@ -16,7 +16,8 @@ class VcapServiceTest : Test({
                 "tags": ["tag-1", "tag-2"],
                 "credentials": {
                   "uri": "postgres://dam5s@localhost:5432/somanyfeeds_dev"
-                }
+                },
+                "foo": "bar"
               }
             ]
           }

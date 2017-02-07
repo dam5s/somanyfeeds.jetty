@@ -1,6 +1,7 @@
 package com.somanyfeeds.cloudfoundry
 
 import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
@@ -13,7 +14,10 @@ data class VcapService(
 
 fun readVcapServices(getenv: (String) -> String? = System::getenv): List<VcapService> {
     val mapType = object : TypeReference<Map<String, List<VcapService>>>() {}
-    val objectMapper = ObjectMapper().apply { registerKotlinModule() }
+    val objectMapper = ObjectMapper().apply {
+        registerKotlinModule()
+        configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
+    }
 
     val servicesJson = getenv("VCAP_SERVICES")!!
     val serviceMap: Map<String, List<VcapService>> = objectMapper.readValue(servicesJson, mapType)
