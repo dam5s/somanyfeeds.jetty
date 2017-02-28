@@ -6,4 +6,6 @@ test {
 
 dependencies {
     testCompile project(":components:rest-support")
+    testCompile project(":components:jetty-support")
+    testCompile "net.code-story:simplelenium:2.2"
 }
