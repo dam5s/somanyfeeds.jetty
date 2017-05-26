@@ -1,6 +1,7 @@
 package com.somanyfeeds.articlesapi
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.somanyfeeds.articlesdataaccess.ArticleRepository
 import com.somanyfeeds.jetty.JettyController
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletResponse
 
 class ArticlesController(val repo: ArticleRepository) : JettyController({
 
-    val objectMapper = ObjectMapper().registerKotlinModule()
+    val objectMapper = jacksonObjectMapper()
 
     get("/articles") { request, response ->
         response.contentType = "application/json"

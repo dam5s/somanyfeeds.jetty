@@ -10,3 +10,25 @@ data class ArticleRecord(
     val date: LocalDateTime,
     val source: String? = null
 )
+
+fun foo() {
+
+    val myArticle = ArticleRecord(link = "http://example.com", content = "Hello", date = LocalDateTime.now())
+
+    val newArticle = myArticle.copy(content = "Hello world")
+
+
+}
+
+fun buildArticleRecord(
+    id: Long? = null,
+    title: String? = null,
+    link: String = "http://example.com",
+    content: String = "Hello",
+    date: LocalDateTime = LocalDateTime.now(),
+    source: String? = null
+): ArticleRecord = ArticleRecord(id, title, link, content, date)
+
+
+
+

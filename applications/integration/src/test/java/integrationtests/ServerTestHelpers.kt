@@ -8,7 +8,7 @@ import org.eclipse.jetty.util.resource.Resource
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
-fun startApiServer(): Process {
+fun startApiServer(port: Int = 8081): Process {
     val workingDir = System.getProperty("user.dir")
 
     val process = ProcessBuilder()
@@ -25,21 +25,21 @@ fun startApiServer(): Process {
               ]
             }
             """)
-        .env("PORT", "8081")
+        .env("PORT", port.toString())
         .env("TWITTER_CONSUMER_KEY", "<twitter_consumer_key>")
         .env("TWITTER_CONSUMER_SECRET", "<twitter_consumer_secret>")
         .env("TWITTER_ACCESS_TOKEN", "<twitter_access_token>")
         .env("TWITTER_ACCESS_TOKEN_SECRET", "<twitter_access_token_secret>")
         .start()
 
-    waitUntilServerIsUp(8081)
+    waitUntilServerIsUp(port)
     return process
 }
 
-fun startFrontendServer(): Server {
+fun startFrontendServer(port :Int = 8082): Server {
     val workingDir = System.getProperty("user.dir")
 
-    return Server(8082).apply {
+    return Server(port).apply {
         stopAtShutdown = true
         handler = ResourceHandler().apply { baseResource = Resource.newResource("$workingDir/../frontend/build") }
         start()

@@ -7,6 +7,7 @@ import com.somanyfeeds.feeddataaccess.FeedRecord
 import com.somanyfeeds.feeddataaccess.FeedType
 import com.somanyfeeds.feedprocessing.FeedProcessor
 import com.somanyfeeds.feedprocessing.toLocalDateTime
+import com.somanyfeeds.restsupport.RestResult
 import com.somanyfeeds.restsupport.RestResult.Error
 import com.somanyfeeds.restsupport.RestResult.Success
 import com.somanyfeeds.restsupport.RestTemplate

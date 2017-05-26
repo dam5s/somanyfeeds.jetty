@@ -5,3 +5,4 @@ build
 env.gradle
 elm-stuff
 snapshots
+phantomjs.log

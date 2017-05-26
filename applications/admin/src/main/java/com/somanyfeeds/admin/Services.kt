@@ -15,8 +15,8 @@ class Services(dataSourceConfig: DataSourceConfig) {
 
     val freemarker = Configuration(Configuration.VERSION_2_3_23).apply {
         setClassLoaderForTemplateLoading(javaClass.classLoader, "templates/")
-        defaultEncoding = "UTF-8";
-        templateExceptionHandler = RETHROW_HANDLER;
+        defaultEncoding = "UTF-8"
+        templateExceptionHandler = RETHROW_HANDLER
         logTemplateExceptions = false
     }
 

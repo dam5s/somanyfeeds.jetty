@@ -15,5 +15,6 @@ include ":components:cloudfoundry-support"
 include ":components:jdbc-support"
 include ":components:rest-support"
 include ":components:jetty-support"
+include ":components:jetty-oauth-support"
 
 rootProject.name = "SoManyFeeds"
