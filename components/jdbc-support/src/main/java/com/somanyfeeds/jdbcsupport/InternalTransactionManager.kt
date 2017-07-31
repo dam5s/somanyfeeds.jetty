@@ -16,6 +16,9 @@ internal class InternalTransactionManager(val dataSource: DataSource) : Transact
                 connection.autoCommit = true
                 return result
 
+            } catch (t: Throwable) {
+                connection.rollback()
+                throw t
             } finally {
                 releaseConnection()
             }
