@@ -16,4 +16,21 @@ both as a web page and as a RSS feed.
  * Elm 0.18
  * Elm Test for Elm 0.18 (`npm install -g elm-test`)
  * Postgres
+ * PhantomJS
  * Graphviz (for the Dependencies Graph)
+
+## Setup Databases
+
+```bash
+createdb somanyfeeds_dev
+createdb somanyfeeds_integration
+createdb somanyfeeds_jdbc_test
+createdb somanyfeeds_feed_test
+createdb somanyfeeds_article_test
+
+psql somanyfeeds_dev < db/schema.ddl
+psql somanyfeeds_integration < db/schema.ddl
+psql somanyfeeds_jdbc_test < db/schema.ddl
+psql somanyfeeds_feed_test < db/schema.ddl
+psql somanyfeeds_article_test < db/schema.ddl
+```

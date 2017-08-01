@@ -10,6 +10,6 @@ dependencies {
     compile "org.jetbrains.kotlinx:kotlinx-support-jdk8:0.3"
 
     testCompile "io.damo.aspen:aspen:$aspenVersion"
-    testCompile "org.assertj:assertj-core:3.6.1"
-    testCompile "com.nhaarman:mockito-kotlin:1.0.1"
+    testCompile "org.assertj:assertj-core:3.8.0"
+    testCompile "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
 }

@@ -1,4 +1,4 @@
-module Tests exposing (..)
+module SoManyFeedsTests.TestSuite exposing (..)
 
 import Test exposing (..)
 import Expect
@@ -8,8 +8,8 @@ import SoManyFeedsTests.Feeds
 import SoManyFeedsTests.Articles
 
 
-all : Test
-all =
+suite : Test
+suite =
     describe "So Many Feeds"
         [ SoManyFeedsTests.DateFormat.tests
         , SoManyFeedsTests.Feeds.tests

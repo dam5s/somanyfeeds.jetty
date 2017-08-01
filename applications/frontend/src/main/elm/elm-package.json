@@ -1,15 +1,13 @@
 {
   "version": "1.0.0",
   "summary": "SoManyFeeds - Feed Aggregator",
-  "repository": "https://github.com/dam5s/somanyfeeds-boot.git",
+  "repository": "https://github.com/dam5s/somanyfeeds-jetty.git",
   "license": "MIT",
   "source-directories": [
-    "src/elm",
-    "tests/elm"
+    "."
   ],
   "exposed-modules": [],
   "dependencies": {
-    "elm-community/elm-test": "3.1.0 <= v < 4.0.0",
     "elm-lang/core": "5.0.0 <= v < 6.0.0",
     "elm-lang/html": "2.0.0 <= v < 3.0.0",
     "elm-lang/navigation": "2.0.1 <= v < 3.0.0",
