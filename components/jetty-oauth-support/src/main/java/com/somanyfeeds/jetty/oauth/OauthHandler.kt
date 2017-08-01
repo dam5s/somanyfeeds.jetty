@@ -2,6 +2,7 @@ package com.somanyfeeds.jetty.oauth
 
 import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.somanyfeeds.jetty.extensions.isGetAt
 import com.somanyfeeds.jetty.extensions.takeAttribute
 import com.somanyfeeds.restsupport.RestResult.Error
 import com.somanyfeeds.restsupport.RestResult.Success
@@ -19,29 +20,28 @@ class OauthHandler(val clientId: String, val clientSecret: String) : AbstractHan
     override fun handle(target: String, request: Request, servletRequest: HttpServletRequest, servletResponse: HttpServletResponse) {
         val session = request.session
 
-        if (request.method == "GET" && request.requestURI == "/logout") {
-            logout(request, servletResponse)
-            return
-        }
-
-        if (request.method == "GET" && request.requestURI == "/oauth/callback") {
-            handleCallback(request, servletResponse)
-            return
-        }
-
-        if (request.method == "GET" && request.requestURI == "/login") {
-            displayLoginPage(request, servletResponse)
-            return
-        }
-
-        if (!isLoggedIn(request)) {
-            if (request.method == "GET") {
-                session.setAttribute("requestedURI", request.requestURI)
+        when {
+            request.isGetAt("/logout") -> {
+                logout(request, servletResponse)
+                return
             }
+            request.isGetAt("/oauth/callback") -> {
+                handleCallback(request, servletResponse)
+                return
+            }
+            request.isGetAt("/login") -> {
+                displayLoginPage(request, servletResponse)
+                return
+            }
+            !isLoggedIn(request) -> {
+                if (request.method == "GET") {
+                    session.setAttribute("requestedURI", request.requestURI)
+                }
 
-            servletResponse.sendRedirect("/login")
-            request.isHandled = true
-            return
+                servletResponse.sendRedirect("/login")
+                request.isHandled = true
+                return
+            }
         }
 
         val requestedURI = session.takeAttribute("requestedURI") as? String
@@ -52,8 +52,7 @@ class OauthHandler(val clientId: String, val clientSecret: String) : AbstractHan
     }
 
     private fun isLoggedIn(request: Request): Boolean {
-        val session = request.session
-        return session.getAttribute("accessToken") != null
+        return request.session.getAttribute("accessToken") != null
     }
 
     private fun logout(request: Request, servletResponse: HttpServletResponse) {
@@ -79,6 +78,7 @@ class OauthHandler(val clientId: String, val clientSecret: String) : AbstractHan
         when (result) {
             is Success<String> -> {
                 val accessToken = result.value.split("&").first().replace("access_token=", "")
+
                 session.setAttribute("accessToken", accessToken)
                 session.setAttribute("login", fetchUsername(accessToken))
                 response.sendRedirect("/")
@@ -88,7 +88,7 @@ class OauthHandler(val clientId: String, val clientSecret: String) : AbstractHan
         }
     }
 
-    val objectMapper = jacksonObjectMapper().apply {
+    private val objectMapper = jacksonObjectMapper().apply {
         configure(FAIL_ON_UNKNOWN_PROPERTIES, false)
     }
 

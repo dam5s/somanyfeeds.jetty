@@ -4,7 +4,7 @@ import com.somanyfeeds.jetty.JettyController
 
 class MainController : JettyController({
 
-    get("/") { request, response ->
+    get("/") { _, response ->
         response.sendRedirect("/feeds")
     }
 })

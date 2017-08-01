@@ -18,14 +18,14 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
     val editFeedTemplate = freemarker.getTemplate("editFeed.ftl")
 
 
-    get("/feeds") { request, response ->
+    get("/feeds") { _, response ->
         val feeds = feedRepo.findAll().map(::present)
         val model = mapOf("feeds" to feeds)
 
         response.render(feedsTemplate, model)
     }
 
-    get("/feeds/(\\d+)/edit") { request, response, uriValues ->
+    get("/feeds/(\\d+)/edit") { _, response, uriValues ->
         val id = uriValues[1].toLong()
         val feed = feedRepo.find(id)
         val model = mapOf("feed" to present(feed))

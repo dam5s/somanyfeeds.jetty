@@ -18,3 +18,7 @@ fun HttpSession.takeAttribute(name: String): Any? {
     removeAttribute(name)
     return value
 }
+
+fun Request.isGetAt(path: String): Boolean {
+    return method == "GET" && requestURI == path
+}
