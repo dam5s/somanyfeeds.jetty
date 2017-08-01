@@ -14,7 +14,6 @@ both as a web page and as a RSS feed.
 
  * Java 8
  * Elm 0.18
- * Elm Test for Elm 0.18 (`npm install -g elm-test`)
  * Postgres
  * PhantomJS
  * Graphviz (for the Dependencies Graph)
