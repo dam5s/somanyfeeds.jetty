@@ -16,8 +16,8 @@ class AcceptanceTest : Test({
     }
 
     after {
-        apiServerProcess?.destroy()
         frontendServer?.stop()
+        apiServerProcess?.destroy()
     }
 
     test {

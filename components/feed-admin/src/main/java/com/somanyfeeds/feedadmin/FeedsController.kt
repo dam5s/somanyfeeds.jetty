@@ -8,6 +8,8 @@ import com.somanyfeeds.jetty.extensions.firstValue
 import com.somanyfeeds.jetty.extensions.formParams
 import com.somanyfeeds.jetty.extensions.takeAttribute
 import freemarker.template.Configuration
+import freemarker.template.Template
+import javax.servlet.ServletResponse
 
 class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) : JettyController({
 
@@ -20,7 +22,7 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
         val feeds = feedRepo.findAll().map(::present)
         val model = mapOf("feeds" to feeds)
 
-        feedsTemplate.process(model, response.writer)
+        response.render(feedsTemplate, model)
     }
 
     get("/feeds/(\\d+)/edit") { request, response, uriValues ->
@@ -28,7 +30,7 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
         val feed = feedRepo.find(id)
         val model = mapOf("feed" to present(feed))
 
-        editFeedTemplate.process(model, response.writer)
+        response.render(editFeedTemplate, model)
     }
 
     get("/feeds/(\\d+)") { request, response, uriValues ->
@@ -40,7 +42,7 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
             "notification" to request.session.takeAttribute("notification")
         )
 
-        showFeedTemplate.process(model, response.writer)
+        response.render(showFeedTemplate, model)
     }
 
     post("/feeds/(\\d+)") { request, response, uriValues ->
@@ -59,3 +61,7 @@ class FeedsController(freemarker: Configuration, val feedRepo: FeedRepository) :
         response.sendRedirect("/feeds/$id")
     }
 })
+
+fun ServletResponse.render(template: Template, model: Map<String, Any?>) {
+    template.process(model, writer)
+}

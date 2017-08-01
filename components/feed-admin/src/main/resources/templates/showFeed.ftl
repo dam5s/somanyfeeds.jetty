@@ -6,9 +6,7 @@
 <h1>View Feed</h1>
 
     <#if notification??>
-    <div class="card notification">
-    ${notification}
-    </div>
+    <div class="card notification">${notification}</div>
     </#if>
 
 <dl class="card">

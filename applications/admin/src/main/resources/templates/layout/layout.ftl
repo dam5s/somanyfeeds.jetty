@@ -28,6 +28,7 @@
         <aside id="app-menu">
             <ul>
                 <li class="not"><a href="/feeds">Feeds</a></li>
+                <li class="not"><a href="/logout">Logout</a></li>
             </ul>
         </aside>
     </section>

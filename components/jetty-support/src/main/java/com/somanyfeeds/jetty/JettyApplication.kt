@@ -38,8 +38,14 @@ abstract class JettyApplication(port: Int) {
 
     protected val server = Server(port)
 
-    protected fun buildClasspathResourcesHandler(basePath: String = "static")
-        = ResourceHandler().apply { baseResource = Resource.newClassPathResource(basePath) }
+    protected fun buildClasspathResourcesHandler(basePath: String = "static"): ResourceHandler {
+        val resourceService = ResourceServiceWithDirectoryPassThrough()
+        val basePathResource = Resource.newClassPathResource(basePath)
+
+        return ResourceHandler(resourceService).apply {
+            baseResource = basePathResource
+        }
+    }
 
     protected fun buildJdbcSessionHandler(dataSource: DataSource): SessionHandler {
 

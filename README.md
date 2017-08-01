@@ -34,3 +34,7 @@ psql somanyfeeds_jdbc_test < db/schema.ddl
 psql somanyfeeds_feed_test < db/schema.ddl
 psql somanyfeeds_article_test < db/schema.ddl
 ```
+
+## Github OAuth
+
+https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/
