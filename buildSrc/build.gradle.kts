@@ -1,26 +1,17 @@
-buildscript {
-    repositories {
-        gradleScriptKotlin()
-        jcenter()
-    }
+import org.gradle.kotlin.dsl.*
 
-    dependencies {
-        classpath(kotlinModule("gradle-plugin", "1.1.3-2"))
-    }
-}
-
-apply {
-    plugin("kotlin")
+plugins {
+    `kotlin-dsl`
 }
 
 repositories {
-    gradleScriptKotlin()
     jcenter()
 }
 
 dependencies {
-    compile(gradleScriptKotlinApi())
-    compile(kotlinModule("stdlib"))
+    compile(gradleKotlinDsl())
+    compile(kotlin("stdlib"))
+    compile("org.jetbrains.kotlinx:kotlinx-support-jdk8:0.3")
 
-    compile("com.yahoo.platform.yui:yuicompressor:2.4.8")
+    compile("com.google.javascript:closure-compiler:v20170910")
 }

@@ -5,8 +5,8 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.UnknownConfigurationException
 import org.gradle.api.tasks.Exec
-import org.gradle.script.lang.kotlin.get
-import org.gradle.script.lang.kotlin.task
+import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.task
 
 class DependenciesGraphPlugin : Plugin<Project> {
 

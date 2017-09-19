@@ -2,8 +2,8 @@ import io.damo.gradle.dependencies.DependenciesGraphPlugin
 
 buildscript {
     ext {
-        aspenVersion = "2.0.0"
-        kotlinVersion = "1.1.3-2"
+        aspenVersion = "2.1.0"
+        kotlinVersion = "1.1.4-3"
         jettyVersion = "9.4.1.v20170120"
         jacksonVersion = "2.9.0"
         postgresVersion = "9.4.1212"
