@@ -2,6 +2,7 @@ package io.damo.gradle.elm
 
 import com.google.javascript.jscomp.*
 import com.google.javascript.jscomp.CompilerOptions.Environment.BROWSER
+import org.gradle.api.GradleException
 import java.io.File
 import java.nio.charset.StandardCharsets.UTF_8
 
@@ -24,7 +25,7 @@ class JsMinifier {
                 val error = result.errors.joinToString(separator = "") {
                     "${it.sourceName}:${it.lineNumber} - ${it.description}\n"
                 }
-                throw RuntimeException(error)
+                throw GradleException(error)
             }
         }
     }

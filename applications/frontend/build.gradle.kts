@@ -15,6 +15,7 @@ task<Copy>("copyAssets") {
         include("**/*.png")
         include("**/*.ico")
         include("**/*.svg")
+        include("**/*.woff2")
         include("Staticfile")
         exclude("elm")
     }
