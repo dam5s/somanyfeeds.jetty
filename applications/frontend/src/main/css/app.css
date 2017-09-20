@@ -46,27 +46,24 @@ section.content {
     overflow-x: hidden;
     width: 100%;
     padding: 0 1% 1rem 1%;
+    columns: 20rem auto;
+}
 
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
-    column-count: 1;
-
-    column-gap: 1rem;
-    -webkit-column-gap: 1rem;
-    -moz-column-gap: 1rem;
-
-    column-fill: auto;
-    -webkit-column-fill: auto;
-    -moz-column-fill: auto;
+@media (min-width: 500px) {
+    #app-content {
+        columns: 25rem auto;
+    }
 }
 
 @media (min-width: 800px) {
     #app-content {
-        column-count: 2;
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
+        columns: 30rem auto;
+    }
+}
 
-        padding: 0 1% 1rem 0;
+@media (min-width: 1200px) {
+    #app-content {
+        columns: 35rem auto;
     }
 }
 
@@ -166,10 +163,6 @@ article {
 
     border-radius: 3px;
     box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    column-break-inside: avoid;
 }
 
 @media (min-width: 500px) {
